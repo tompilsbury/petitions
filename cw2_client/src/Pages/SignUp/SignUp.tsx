@@ -22,8 +22,13 @@ function SignUp() {
     dob: null,
     bioID: '',
   });
+  // const [password, setPassword] = useState<string>('');
+  // const [passwordError, setPasswordError] = useState<string
+  const [error, setError] = useState<string>('');
+
   const [confirmPassword, setConfirmPassword] = useState<string>('');
-  const [passwordError, setPasswordError] = useState<string>('');
+  const [confirmPasswordError, setConfirmPasswordError] = useState<string>('');
+
   const [scanResult, setScanResult] = useState<string>('');
   const [isQRCodeActive, setIsQRCodeActive] = useState<boolean>(false);
   const readerRef = useRef<HTMLDivElement | null>(null);
@@ -73,15 +78,15 @@ function SignUp() {
     console.log(inputs);
 
     if (inputs.password !== confirmPassword) {
-      setPasswordError('Passwords do not match.');
+      setConfirmPasswordError('Passwords do not match.');
       return;
     }
 
     if (inputs.dob != null) {
       const res = await addUser(inputs);
-      setPasswordError('');
+      setConfirmPasswordError('');
       console.log(res.data)
-      res.status === 200 ? navigate('/login') : navigate('/register');
+      res.status === 200 ? navigate('/login') : setError(res?.data?.error);
     }
   };
 
@@ -91,9 +96,9 @@ function SignUp() {
     setConfirmPassword(value);
 
     if (inputs.password !== value) {
-      setPasswordError('Passwords do not match.');
+      setConfirmPasswordError('Passwords do not match.');
     } else {
-      setPasswordError('');
+      setConfirmPasswordError('');
     }
   };
 
@@ -151,7 +156,7 @@ function SignUp() {
           <div className="label">
             Confirm Password:
           </div>
-          <div className={`input-box${passwordError ? '-error' : ''}`}>
+          <div className={`input-box${confirmPasswordError ? '-error' : ''}`}>
             <input
               type="password"
               placeholder="Passwords must match"
@@ -159,6 +164,7 @@ function SignUp() {
               onChange={handleConfirmPasswordChange}
               required
             />
+            <div className="error">{confirmPasswordError}</div>
           </div>
           <div className="label">
             Date of birth:
@@ -196,19 +202,15 @@ function SignUp() {
               <img src='/icons8-camera-50.png' height={20} alt="QR code icon"/> <p>Scan QR</p>
           </span>
           </div>
-          {/* <span
-              className={`icon ${isQRCodeActive ? 'active' : ''}`}
-              onClick={toggleQRCode}
-              title={isQRCodeActive ? 'Switch to Manual Entry' : 'Use QR Code for Bio ID'}
-            >
-              <img src='/icons8-camera-50.png' height={20} alt="QR code icon"/> Scan a QR code.
-          </span> */}
-
+  
           {/* QR Code Scanner */}
           {isQRCodeActive && (
             <div id="reader" ref={readerRef} className="reader"></div>
           )}
 
+          <div className="error">
+            {error}
+          </div>
           <div className="input-box button">
             <input type="Submit" value="Register Now" />
           </div>

@@ -76,7 +76,7 @@
 }
 
 .SignUp form .input-box-error {height: 52px;
-  margin: 18px 0;}
+margin-bottom: 24px;}
 .SignUp form .input-box-error input {
   height: 100%;
   width: 100%;
@@ -89,6 +89,11 @@
   border-radius: 6px;
   transition: all 0.3s ease;
   border-color: red;
+}
+
+.SignUp form .error {
+  color: red;
+  /* position: absolute; */
 }
 
 .SignUp .input-box input:focus,
