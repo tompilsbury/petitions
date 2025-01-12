@@ -37,3 +37,13 @@
 .thresholdManager button:hover {
     background: #028174;
 }
+
+.thresholdManager .success {
+    color: #0AB68B;
+    font-size: 30px;
+}
+
+.thresholdManager .error {
+    color: red;
+    font-size: 30px;
+}

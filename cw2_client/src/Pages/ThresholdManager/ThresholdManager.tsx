@@ -7,7 +7,8 @@ import "./ThresholdManager.css"
 function ThresholdManager() {
     const {token, isAdmin} = useAuth();
     const [threshold, setThreshold] = useState("");
-    const navigate = useNavigate();
+    const [feedback, setFeedback] = useState("");
+    const [error, setError] = useState("")
 
     useEffect(() => {
         console.log(token)
@@ -30,9 +31,11 @@ function ThresholdManager() {
         if (token) {
             try {
                 const response = await updateSetting(threshold, token);
-                navigate(0)
+                // navigate(0)
+                setFeedback("Petition threshold successfully updated")
             } catch (error) {
                 console.error('Error updating petition threshold:', error)
+                setError("Error updating the petition threshold")
             }
         }
     }
@@ -44,6 +47,8 @@ function ThresholdManager() {
             </div>
             <input type="number" name="threshold" min="1" step="1" defaultValue={threshold} onChange={(e) => setThreshold(e.target.value)} />
             <button onClick={() => updateThreshold()}>Submit</button>
+            <div className="success">{feedback}</div>
+            <div className="error">{error}</div>
         </div>
     )
 }
