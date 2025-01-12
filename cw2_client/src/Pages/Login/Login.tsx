@@ -18,18 +18,22 @@ function Login() {
     email: '',
     password: ''
   });
+  const [error, setError] = useState<String>("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setInputs((prevInputs) => ({
       ...prevInputs,
-      [name]: value, // Dynamically set the key based on the input's name attribute
+      [name]: value,
     }));
   }
   const loginUser = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(inputs)
-    auth.login(inputs);
+    const result: any = await auth.login(inputs);
+    if (result instanceof Error) {
+      console.error("Login failed:", result.message);
+      setError(result.message);
+    } 
   };
 
 
@@ -37,6 +41,9 @@ function Login() {
     <div className='Login'>
       <div className="wrapper">
       <h2>Please login to access the Shangri-La petitions.</h2>
+      <div className="error">
+        {error}
+      </div>
       <form onSubmit={loginUser}>
         <div className="label">
             Email:

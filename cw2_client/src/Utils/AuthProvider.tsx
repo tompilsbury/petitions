@@ -2,6 +2,7 @@ import { useContext, createContext, useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { validateUser } from "./Requests";
 import { jwtDecode, JwtPayload } from "jwt-decode";
+import { response } from "express";
 
 type LoginType = {
     email: string;
@@ -46,11 +47,10 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
     }, [token]);
 
-    const login = async (data: LoginType): Promise<boolean> => {
+    const login = async (data: LoginType): Promise<boolean | Error> => {
         try {
             const response = await validateUser(data);
             console.log("Login Response:", response);
-
             if (response?.status === 200) {
                 const data = response.data;
                 setToken(data.token);
@@ -61,10 +61,11 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 navigate('/dashboard');
                 return true;
             }
-        } catch (error) {
-            return false
+            return new Error(response?.data?.error);
+        } catch (error: any) {
+            console.error("Error during login:", error);
+            return new Error(error.message || 'An unexpected error occurred');
         }
-        return false
     };
 
     const logout = () => {

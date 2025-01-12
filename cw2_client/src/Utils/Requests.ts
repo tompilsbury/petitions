@@ -25,18 +25,15 @@ const addUser = async (data: RegisterInputs) => {
     return response; // Success response
   } catch (error: any) {
     if (error.response) {
-      // Server responded with a status code outside 2xx
       console.error('Server error:', error.response.status, error.response.data);
       return {
         status: error.response.status,
         data: error.response.data,
       };
     } else if (error.request) {
-      // Request was made, but no response received
       console.error('Network error:', error.request);
       return { status: 0, data: 'Network error. Please try again.' };
     } else {
-      // Other errors (e.g., request setup issues)
       console.error('Error:', error.message);
       return { status: 0, data: error.message };
     }
@@ -47,21 +44,18 @@ const validateUser = async (data: LoginUser) => {
     const response = await axios.post(`http://localhost:8080/auth/login`, data, {
       headers: { 'Content-Type': 'application/json' }
     });
-    return response; // This will return the Axios response object on success
+    return response;
   } catch (error: any) {
     if (error.response) {
-      // If the server responded with an error status
       console.error('Server error:', error.response.status, error.response.data);
       return {
         status: error.response.status,
         data: error.response.data,
       };
     } else if (error.request) {
-      // If the request was made but no response was received
       console.error('Network error:', error.request);
       return { status: 0, data: 'Network error. Please try again.' };
     } else {
-      // If something else went wrong
       console.error('Error:', error.message);
       return { status: 0, data: error.message };
     }

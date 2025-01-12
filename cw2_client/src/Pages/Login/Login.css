@@ -28,6 +28,14 @@
   width: 28px;
   border-radius: 12px;
 }
+
+.Login .wrapper .error {
+  color: red;
+  position: absolute;
+  left: 45%;
+
+}
+
 .Login .wrapper form{
   margin-top: 30px;
 }
