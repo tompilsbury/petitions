@@ -50,6 +50,9 @@ public class AuthenticationService {
         petitioner.setDob(input.getDob());
         BioID bioid = bioIDRepository.findById(input.getBioID())
                 .orElseThrow(() -> new InvalidBioIDException("Invalid BioID: " + input.getBioID()));
+        if (bioid.getUsed() > 0) {
+            throw new InvalidBioIDException("BioID already in use: " + input.getBioID());
+        }
         petitioner.setBioID(bioid);
 
         return petitionerRepository.save(petitioner);
