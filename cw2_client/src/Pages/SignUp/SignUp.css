@@ -1,0 +1,125 @@
+/* Form styling from https://www.codingnepalweb.com/registration-signup-form-template-html-css/ */
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+.SignUp {
+  margin-top: 0px;
+}
+.SignUp .wrapper{
+  max-width: 600px;
+  width: 100%;
+  margin: auto;
+  background: #fff;
+  padding: 34px;
+  border-radius: 6px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+.SignUp .wrapper h2{
+  position: relative;
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+}
+.SignUp .wrapper h2::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 28px;
+  border-radius: 12px;
+}
+.SignUp .wrapper form{
+  margin-top: 30px;
+}
+
+.SignUp .wrapper form .label {
+  display: block; 
+  margin-bottom: 4px;
+  font-size: 14px; 
+  text-align: left;
+}
+
+.SignUp .wrapper form .input-box{
+  height: 52px;
+  /* margin: 18px 0; */
+  margin-bottom: 24px;
+  position: relative;
+  display: flex;
+}
+.SignUp form .input-box input{
+  height: 100%;
+  width: 100%;
+  outline: none;
+  font-size: 17px;
+  font-weight: 400;
+  color: #333;
+  border: 1.5px solid #C7BEBE;
+  border-bottom-width: 2.5px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.SignUp form .icon {
+  position: absolute;
+  right: 3px;
+  cursor: pointer;
+  top: 25%;
+}
+
+.SignUp form .icon img {
+  height: 20px;
+  width: auto;
+}
+
+.SignUp form .icon p {
+  font-size:12px;
+}
+
+.SignUp form .input-box-error {height: 52px;
+  margin: 18px 0;}
+.SignUp form .input-box-error input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  font-size: 17px;
+  font-weight: 400;
+  color: #333;
+  border: 1.5px solid #C7BEBE;
+  border-bottom-width: 2.5px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  border-color: red;
+}
+
+.SignUp .input-box input:focus,
+.SignUp .input-box input:valid{
+  border-color: #0AB68B;
+}
+.SignUp form h3{
+  color: #707070;
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 10px;
+}
+.SignUp .input-box.button input{
+  color: #fff;
+  letter-spacing: 1px;
+  border: none;
+  background: #0AB68B;
+  cursor: pointer;
+}
+.SignUp .input-box.button input:hover{
+  background: #028174;
+}
+.SignUp form .text h3{
+ color: #333;
+ width: 100%;
+ text-align: center;
+}
+.SignUp form .text h3 a{
+  color: #4070f4;
+  text-decoration: none;
+}
+.SignUp form .text h3 a:hover{
+  text-decoration: underline;
+}

@@ -1,0 +1,109 @@
+.petitionPage {
+    width: 40%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.petitionPage .title {
+    font-size: 70px;
+    margin-top: 50px;
+
+}
+.petitionPage .title .status {
+    display: inline;
+    font-style: italic;
+    text-decoration: underline;
+}
+
+.petitionPage .content {
+    font-size: 30px;
+}
+
+.petitionPage .signatures {
+    margin-top: 50px;
+    font-size: 26px;
+}
+
+/* Progress styling from the following link: */
+/* https://stackoverflow.com/questions/42290719/custom-styling-progress-bar-in-css */
+.petitionPage progress {
+    width: 100%;
+    height: 30px;
+    background-color: #92DE8B;
+    border-radius: 0; 
+    appearance: none; 
+}
+progress::-webkit-progress-bar {
+    background-color: lightgray;
+    border-radius: 7px;
+}
+progress::-webkit-progress-value {
+    background-color: #3ec762;
+}
+.petitionPage .signatureBar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 26px;
+}
+
+.petitionPage button {
+    background-color: #0AB68B;
+    color: white;
+    margin-top: 10px;
+    border: none;
+    height: 50px;
+    width: auto;
+    font-size: large;
+    cursor: pointer;
+    width: 100px;
+    font-size: 30px;
+    border-radius: 6px;
+    border-bottom: 1px;
+    border-color: black;
+    border-style: solid;
+    transition: all 0.3s ease;
+}
+
+.petitionPage button:hover {
+    background: #028174;
+
+}
+
+.petitionPage .information {
+    margin-top: 40px;
+    font-size: 20px;
+}
+
+.petitionPage .response {
+    margin-top: 50px;
+    font-size: 26px;
+}
+
+.petitionPage .responseBox {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
+.petitionPage .responseBox h2 {
+    font-weight: bold;
+}
+
+.petitionPage .responseBox textarea{
+    margin-top: 10px;
+    width: 100%;
+    height: 150px;
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+.petitionPage .responseBox button {
+    margin-top: 10px;
+    width: 150px;
+    height: 50px;
+}

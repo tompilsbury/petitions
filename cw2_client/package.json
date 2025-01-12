@@ -1,0 +1,48 @@
+{
+  "name": "cw2_client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@mui/x-date-pickers": "^7.23.2",
+    "cra-template-typescript": "1.2.0",
+    "date-fns": "^4.1.0",
+    "html5-qrcode": "^2.3.8",
+    "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
+    "react": "^18.3.1",
+    "react-datepicker": "^7.5.0",
+    "react-day-picker": "^9.4.4",
+    "react-dom": "^18.3.1",
+    "react-qr-scanner": "^1.0.0-alpha.11",
+    "react-router-dom": "^7.0.2",
+    "react-scripts": "5.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.2"
+  }
+}

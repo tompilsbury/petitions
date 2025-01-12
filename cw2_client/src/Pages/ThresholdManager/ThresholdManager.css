@@ -1,0 +1,39 @@
+.thresholdManager {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.thresholdManager .title {
+    margin-top: 200px;
+    margin-bottom: 50px;
+}
+
+.thresholdManager .title p{
+    display: inline;
+    font-weight: bold;
+}
+
+.thresholdManager input {
+    width: 500px;
+    font-size: 80px;
+    height: auto;
+    text-align: center;
+}
+
+.thresholdManager button {
+    background-color: #0AB68B;
+    color: white;
+    margin-block: 1rem;
+    border: none;
+    height: 50px;
+    width: 100px;
+    font-size: large;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.thresholdManager button:hover {
+    background: #028174;
+}
