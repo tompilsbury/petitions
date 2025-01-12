@@ -36,7 +36,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll() // Allow public access to /auth/**
                         .requestMatchers("/settings/**").permitAll() // Allow public access to /settings
-                        .requestMatchers("/petitions").permitAll() // Allow public access to /petitions
+                        .requestMatchers("/slpp/petitions").permitAll() // Allow public access to /petitions
                         .anyRequest().authenticated() // Require authentication for all other requests
                 )
                 .sessionManagement(session -> session
