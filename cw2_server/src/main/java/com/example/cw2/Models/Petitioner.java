@@ -23,7 +23,7 @@ public class Petitioner implements UserDetails {
     @ManyToOne
     @JoinColumn(name = "bioid", referencedColumnName = "code")
     private BioID bioid;
-    @ManyToMany(mappedBy = "signatures")
+    @ManyToMany(mappedBy = "signatures", cascade = CascadeType.ALL)
     private List<Petition> signedPetitions = new ArrayList<>();
 
     //Init
