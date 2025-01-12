@@ -86,7 +86,7 @@ function SignUp() {
       const res = await addUser(inputs);
       setConfirmPasswordError('');
       console.log(res.data)
-      res.status === 200 ? navigate('/login') : setError(res?.data?.error);
+      res.status === 200 ? navigate('/login') : setError(res?.data?.message);
     }
   };
 
