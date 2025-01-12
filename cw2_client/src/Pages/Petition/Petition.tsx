@@ -79,7 +79,7 @@ function Petition() {
                 const responsePayload = {responseText}
                 const response = await submitPetitionResponse(id, token, responsePayload)
                 console.log("Response submitted", response)
-                // navigate(0)
+                navigate(0)
             } catch (error) {
                 console.error('Error submitting petition response', error)
             }
