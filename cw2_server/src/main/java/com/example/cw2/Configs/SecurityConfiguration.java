@@ -18,17 +18,14 @@ import java.util.List;
 public class SecurityConfiguration {
     private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
-    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 
 
     public SecurityConfiguration(
             JwtAuthenticationFilter jwtAuthenticationFilter,
-            AuthenticationProvider authenticationProvider,
-            CustomAuthenticationEntryPoint customAuthenticationEntryPoint
+            AuthenticationProvider authenticationProvider
     ) {
         this.authenticationProvider = authenticationProvider;
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
-        this.customAuthenticationEntryPoint = customAuthenticationEntryPoint;
     }
 
     @Bean
@@ -39,18 +36,19 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll() // Allow public access to /auth/**
                         .requestMatchers("/settings/**").permitAll() // Allow public access to /settings
-                        .requestMatchers("/petitions").permitAll()
+                        .requestMatchers("/petitions").permitAll() // Allow public access to /petitions
                         .anyRequest().authenticated() // Require authentication for all other requests
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Use stateless sessions
                 )
                 .authenticationProvider(authenticationProvider) // Add custom authentication provider
-                .exceptionHandling(exception -> exception.authenticationEntryPoint(customAuthenticationEntryPoint))
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // Add JWT filter
+
 
         return http.build();
     }
+
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
