@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import './Login.css';
 
-import { validateUser } from '../../Utils/Requests';
 import { useAuth } from '../../Utils/AuthProvider';
 
 interface LoginType {
   email: string,
   password: string
+}
+
+interface LoginError {
+  status: number,
+  message: string
 }
 
 function Login() {
@@ -18,7 +20,7 @@ function Login() {
     email: '',
     password: ''
   });
-  const [error, setError] = useState<String>("");
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -27,13 +29,29 @@ function Login() {
       [name]: value,
     }));
   }
+
+  function isLoginError(result: boolean | LoginError): result is LoginError {
+    return (result as LoginError).status !== undefined && (result as LoginError).message !== undefined;
+  }   
+
   const loginUser = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const result: any = await auth.login(inputs);
-    if (result instanceof Error) {
-      console.error("Login failed:", result.message);
-      setError(result.message);
-    } 
+    setError(null);
+    try {
+        const result = await auth.login(inputs); 
+        if (isLoginError(result)) {
+            console.error("Login failed:", result.message);
+            setError(result.message);
+
+        } else if (result === true) {
+            console.log("Login successful!");
+        } else {
+            setError("An unexpected error occurred.");
+        }
+    } catch (error) {
+        console.error("Unexpected error during login:", error);
+        setError("An error occurred during login. Please try again.");
+    }
   };
 
 

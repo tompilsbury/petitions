@@ -31,9 +31,6 @@
 
 .Login .wrapper .error {
   color: red;
-  position: absolute;
-  left: 45%;
-
 }
 
 .Login .wrapper form{

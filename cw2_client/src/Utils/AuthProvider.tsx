@@ -11,7 +11,7 @@ type LoginType = {
 
 interface ProviderProps {
     token: string;
-    login(data: LoginType): void;
+    login(data: LoginType): Promise<boolean | LoginError>;
     logout(): void;
     isAdmin: boolean;
 }
@@ -20,12 +20,31 @@ interface CustomJwtPayload extends JwtPayload {
     is_admin: boolean;
 }
 
-const AuthContext = createContext<ProviderProps>({
+interface LoginError {
+    status: number,
+    message: string
+}
+
+const defaultAuthContext: ProviderProps = {
     token: '',
-    login: () => {},
+    login: async () => {
+        return { status: 500, message: 'Not implemented' }; 
+    },
     logout: () => {},
     isAdmin: false,
-});
+};
+
+
+// const AuthContext = createContext<ProviderProps>({
+//     token: '',
+//     login: () => {
+//         return { status: 500, message: 'Not implemented' };
+//     },
+//     logout: () => {},
+//     isAdmin: false,
+// });
+
+const AuthContext = createContext<ProviderProps>(defaultAuthContext);
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const storedToken = localStorage.getItem('token') || '';
@@ -47,27 +66,39 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
     }, [token]);
 
-    const login = async (data: LoginType): Promise<boolean | Error> => {
+    const login = async (data: LoginType): Promise<boolean | LoginError> => {
         try {
             const response = await validateUser(data);
             console.log("Login Response:", response);
+    
             if (response?.status === 200) {
                 const data = response.data;
                 setToken(data.token);
                 localStorage.setItem("token", data.token);
-
+    
                 const decoded: CustomJwtPayload = jwtDecode(data.token);
                 setIsAdmin(decoded.is_admin);
                 navigate('/dashboard');
+                
                 return true;
+            } else {
+                const error: LoginError = {
+                    status: response?.status || 500,
+                    message: response?.data?.message || 'Login failed',
+                };
+                return error;
             }
-            return new Error(response?.data?.error);
         } catch (error: any) {
             console.error("Error during login:", error);
-            return new Error(error.message || 'An unexpected error occurred');
+                const loginError: LoginError = {
+                status: 500,
+                message: 'Unexpected error during login',
+            };
+            return loginError;
         }
     };
-
+    
+    
     const logout = () => {
         setToken('');
         setIsAdmin(false);
@@ -76,7 +107,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ token, login, logout, isAdmin }}>
+        <AuthContext.Provider value={{ token, login , logout, isAdmin }}>
             {children}
         </AuthContext.Provider>
     );
