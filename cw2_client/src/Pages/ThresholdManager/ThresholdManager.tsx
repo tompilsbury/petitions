@@ -15,11 +15,11 @@ function ThresholdManager() {
         const fetchData = async () => {
             if (token) {
                 try {
-                    const response = await getSetting();  // Await the async function
+                    const response = await getSetting();
                     console.log(response)
                     setThreshold(response.data)
                 } catch (error) {
-                    console.error('Error fetching signature threshold:', error);  // Handle any errors
+                    console.error('Error fetching signature threshold:', error); 
                 }
             }
         };

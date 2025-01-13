@@ -2,7 +2,6 @@ import { useContext, createContext, useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { validateUser } from "./Requests";
 import { jwtDecode, JwtPayload } from "jwt-decode";
-import { response } from "express";
 
 type LoginType = {
     email: string;
@@ -34,15 +33,6 @@ const defaultAuthContext: ProviderProps = {
     isAdmin: false,
 };
 
-
-// const AuthContext = createContext<ProviderProps>({
-//     token: '',
-//     login: () => {
-//         return { status: 500, message: 'Not implemented' };
-//     },
-//     logout: () => {},
-//     isAdmin: false,
-// });
 
 const AuthContext = createContext<ProviderProps>(defaultAuthContext);
 
