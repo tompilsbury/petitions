@@ -100,12 +100,16 @@ function Petition() {
         <div className="signatureBar">
             <progress id="progressBar" value={petition?.signatureCount} max={threshold}></progress>
         </div>
-        {signed || petition?.status == "closed" ? (
-            <p style={{fontStyle: 'italic'}}>You have signed this petition.</p>
-        ): (
-            <div className="petitionPageButton">
-                <button onClick={() => handleSign(petition?.id)}>Sign</button>
-            </div>
+        {petition?.status == "closed" ? (
+            <></>
+        ) : (
+            signed ? (
+                <p style={{fontStyle: 'italic'}}>You have signed this petition.</p>
+            ) : (
+                <div className="petitionPageButton">
+                    <button onClick={() => handleSign(petition?.id)}>Sign</button>
+                </div>
+            )
         )}
 
         <div className="information">
